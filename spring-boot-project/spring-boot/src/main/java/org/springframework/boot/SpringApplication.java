@@ -305,10 +305,10 @@ public class SpringApplication {
 		configureHeadlessProperty();
 		//Spring Factories机制加载SpringApplicationRunListener列表
 		SpringApplicationRunListeners listeners = getRunListeners(args);
+		//发布ApplicationStartingEvent
 		listeners.starting();
 		try {
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
-			//配置SimpleCommandLinePropertySource到Environment中
 			ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);
 			configureIgnoreBeanInfo(environment);
 			Banner printedBanner = printBanner(environment);
@@ -323,7 +323,9 @@ public class SpringApplication {
 			if (this.logStartupInfo) {
 				new StartupInfoLogger(this.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);
 			}
+			//发布ApplicationStartedEvent
 			listeners.started(context);
+			//运行Bean容器管理的ApplicationRunner和CommandLineRunner Bean实例
 			callRunners(context, applicationArguments);
 		}
 		catch (Throwable ex) {
@@ -332,6 +334,7 @@ public class SpringApplication {
 		}
 
 		try {
+			//发布ApplicationReadyEvent
 			listeners.running(context);
 		}
 		catch (Throwable ex) {
@@ -347,6 +350,7 @@ public class SpringApplication {
 		ConfigurableEnvironment environment = getOrCreateEnvironment();
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
 		ConfigurationPropertySources.attach(environment);
+		//发布ApplicationEnvironmentPreparedEvent
 		listeners.environmentPrepared(environment);
 		bindToSpringApplication(environment);
 		if (!this.isCustomEnvironment) {
@@ -372,8 +376,8 @@ public class SpringApplication {
 			SpringApplicationRunListeners listeners, ApplicationArguments applicationArguments, Banner printedBanner) {
 		context.setEnvironment(environment);
 		postProcessApplicationContext(context);
-		//ApplicationContextInitializer扩展点,一般用于配置属性源
 		applyInitializers(context);
+		//发布ApplicationContextInitializedEvent
 		listeners.contextPrepared(context);
 		if (this.logStartupInfo) {
 			logStartupInfo(context.getParent() == null);
@@ -484,7 +488,9 @@ public class SpringApplication {
 			ConversionService conversionService = ApplicationConversionService.getSharedInstance();
 			environment.setConversionService((ConfigurableConversionService) conversionService);
 		}
+		//配置SimpleCommandLinePropertySource
 		configurePropertySources(environment, args);
+		//解析命令行配置的Profile
 		configureProfiles(environment, args);
 	}
 
