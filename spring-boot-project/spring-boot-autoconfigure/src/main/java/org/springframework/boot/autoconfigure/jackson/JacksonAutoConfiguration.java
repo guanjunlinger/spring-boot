@@ -165,6 +165,7 @@ public class JacksonAutoConfiguration {
 
 	}
 
+
 	@Configuration(proxyBeanMethods = false)
 	@ConditionalOnClass(Jackson2ObjectMapperBuilder.class)
 	static class JacksonObjectMapperBuilderConfiguration {
@@ -189,6 +190,9 @@ public class JacksonAutoConfiguration {
 
 	}
 
+	/**
+	 * 提取Environment中的JacksonProperties相关属性定制化ObjectMapper
+	 */
 	@Configuration(proxyBeanMethods = false)
 	@ConditionalOnClass(Jackson2ObjectMapperBuilder.class)
 	@EnableConfigurationProperties(JacksonProperties.class)

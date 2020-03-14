@@ -62,12 +62,20 @@ public class MultipartAutoConfiguration {
 		this.multipartProperties = multipartProperties;
 	}
 
+	/**
+	 * 默认配置的MultipartConfigElement Bean Class
+	 * @return
+	 */
 	@Bean
 	@ConditionalOnMissingBean({ MultipartConfigElement.class, CommonsMultipartResolver.class })
 	public MultipartConfigElement multipartConfigElement() {
 		return this.multipartProperties.createMultipartConfig();
 	}
 
+	/**
+	 * 默认配置StandardServletMultipartResolver Bean Class
+	 * @return
+	 */
 	@Bean(name = DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME)
 	@ConditionalOnMissingBean(MultipartResolver.class)
 	public StandardServletMultipartResolver multipartResolver() {

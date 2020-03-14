@@ -47,6 +47,11 @@ import org.springframework.scheduling.config.TaskManagementConfigUtils;
 @AutoConfigureAfter(TaskExecutionAutoConfiguration.class)
 public class TaskSchedulingAutoConfiguration {
 
+	/**
+	 * 仅当存在ScheduledAnnotationBeanPostProcessor Bean时,注册ThreadPoolTaskScheduler
+	 * @param builder
+	 * @return
+	 */
 	@Bean
 	@ConditionalOnBean(name = TaskManagementConfigUtils.SCHEDULED_ANNOTATION_PROCESSOR_BEAN_NAME)
 	@ConditionalOnMissingBean({ SchedulingConfigurer.class, TaskScheduler.class, ScheduledExecutorService.class })
