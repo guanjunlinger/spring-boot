@@ -36,7 +36,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for {@link TaskExecutor}.
- *
+ * 异步任务线程池默认配置,允许TaskExecutorCustomizer自定义配置
  * @author Stephane Nicoll
  * @author Camille Vienot
  * @since 2.1.0
