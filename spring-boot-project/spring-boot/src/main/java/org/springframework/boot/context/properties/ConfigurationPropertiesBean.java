@@ -254,6 +254,10 @@ public final class ConfigurationPropertiesBean {
 	}
 
 	private static ConfigurationPropertiesBean create(String name, Object instance, Class<?> type, Method factory) {
+		/**
+		 * 1.@bean工厂方法的@ConfigurationProperties注解
+		 * 2.Class上的@ConfigurationProperties注解
+		 */
 		ConfigurationProperties annotation = findAnnotation(instance, type, factory, ConfigurationProperties.class);
 		if (annotation == null) {
 			return null;
