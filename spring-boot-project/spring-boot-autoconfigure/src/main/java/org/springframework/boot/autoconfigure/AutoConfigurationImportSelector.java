@@ -120,7 +120,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 		Set<String> exclusions = getExclusions(annotationMetadata, attributes);
 		checkExcludedClasses(configurations, exclusions);
 		configurations.removeAll(exclusions);
-		//Spring factories机制加载AutoConfigurationImportFilter列表,快速过滤SpringBoot自动配置候选Bean
+		//Spring factories机制加载AutoConfigurationImportFilter列表,通过ClassLoader快速过滤自动配置候选Bean
 		configurations = filter(configurations, autoConfigurationMetadata);
 		//Spring  factories机制加载AutoConfigurationImportListener列表,发布AutoConfigurationImportEvent
 		fireAutoConfigurationImportEvents(configurations, exclusions);
@@ -415,7 +415,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 					.map(AutoConfigurationEntry::getConfigurations).flatMap(Collection::stream)
 					.collect(Collectors.toCollection(LinkedHashSet::new));
 			processedConfigurations.removeAll(allExclusions);
-
+            //候选自动配置Bean排序
 			return sortAutoConfigurations(processedConfigurations, getAutoConfigurationMetadata()).stream()
 					.map((importClassName) -> new Entry(this.entries.get(importClassName), importClassName))
 					.collect(Collectors.toList());
