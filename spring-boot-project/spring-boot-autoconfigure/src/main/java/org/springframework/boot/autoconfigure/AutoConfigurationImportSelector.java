@@ -61,7 +61,7 @@ import org.springframework.util.StringUtils;
  * {@link DeferredImportSelector} to handle {@link EnableAutoConfiguration
  * auto-configuration}. This class can also be subclassed if a custom variant of
  * {@link EnableAutoConfiguration @EnableAutoConfiguration} is needed.
- *
+ *  DeferredImportSelector等到所有配置候选Bean注册完,
  * @author Phillip Webb
  * @author Andy Wilkinson
  * @author Stephane Nicoll
