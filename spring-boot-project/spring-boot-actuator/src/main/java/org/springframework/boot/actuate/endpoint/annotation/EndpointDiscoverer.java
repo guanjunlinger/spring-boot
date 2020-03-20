@@ -119,7 +119,9 @@ public abstract class EndpointDiscoverer<E extends ExposableEndpoint<O>, O exten
 	}
 
 	private Collection<E> discoverEndpoints() {
+		//扫描所有@EndPoint注解的Bean,生成EndpointBean列表
 		Collection<EndpointBean> endpointBeans = createEndpointBeans();
+		//扫描所有@EndpointExtension注解的Bean,将ExtensionBean与对应的EndpointBean绑定
 		addExtensionBeans(endpointBeans);
 		return convertToEndpoints(endpointBeans);
 	}
