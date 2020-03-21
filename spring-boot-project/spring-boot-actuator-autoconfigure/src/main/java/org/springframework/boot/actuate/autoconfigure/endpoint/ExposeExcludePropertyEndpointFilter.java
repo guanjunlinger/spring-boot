@@ -36,7 +36,7 @@ import org.springframework.util.Assert;
 /**
  * {@link EndpointFilter} that will filter endpoints based on {@code include} and
  * {@code exclude} properties.
- *
+ *   引入黑名单和白名单机制,过滤ExposableEndpoint实例
  * @param <E> the endpoint type
  * @author Phillip Webb
  * @since 2.0.0

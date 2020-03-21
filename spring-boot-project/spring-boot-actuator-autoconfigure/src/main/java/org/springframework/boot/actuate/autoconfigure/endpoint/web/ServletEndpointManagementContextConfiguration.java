@@ -53,7 +53,7 @@ public class ServletEndpointManagementContextConfiguration {
 		return new ExposeExcludePropertyEndpointFilter<>(ExposableServletEndpoint.class, exposure.getInclude(),
 				exposure.getExclude());
 	}
-
+    //利用ServletEndpointRegistrar注册ExposableServletEndpoint到ServlerContext
 	@Configuration(proxyBeanMethods = false)
 	@ConditionalOnClass(DispatcherServlet.class)
 	public static class WebMvcServletEndpointManagementContextConfiguration {

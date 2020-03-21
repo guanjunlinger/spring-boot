@@ -53,7 +53,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for web {@link Endpoint @Endpoint}
  * support.
- *
+ * 自动配置EndpointDiscoverer Bean
  * @author Phillip Webb
  * @author Stephane Nicoll
  * @since 2.0.0
