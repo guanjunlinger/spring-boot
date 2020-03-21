@@ -34,7 +34,7 @@ import org.springframework.util.ObjectUtils;
 /**
  * An {@link OperationInvoker} that caches the response of an operation with a
  * configurable time to live.
- * 装饰器模式,引入缓存机制
+ * 装饰器模式,增加缓存机制
  * @author Stephane Nicoll
  * @author Christoph Dreis
  * @author Phillip Webb

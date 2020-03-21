@@ -89,6 +89,7 @@ abstract class DiscoveredOperationsFactory<O extends Operation> {
 		DiscoveredOperationMethod operationMethod = new DiscoveredOperationMethod(method, operationType,
 				annotation.asAnnotationAttributes());
 		OperationInvoker invoker = new ReflectiveOperationInvoker(target, operationMethod, this.parameterValueMapper);
+		//OperationInvokerAdvisor引入责任链模式,拦截OperationInvoker调用
 		invoker = applyAdvisors(endpointId, operationMethod, invoker);
 		return createOperation(endpointId, operationMethod, invoker);
 	}

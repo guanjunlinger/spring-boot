@@ -32,6 +32,8 @@ import org.springframework.util.Assert;
 /**
  * {@link OperationParameters} created from an {@link OperationMethod}.
  *
+ *   管理和解析OperationMethod的参数元信息
+ *   管理OperationParameter列表
  * @author Phillip Webb
  */
 class OperationMethodParameters implements OperationParameters {

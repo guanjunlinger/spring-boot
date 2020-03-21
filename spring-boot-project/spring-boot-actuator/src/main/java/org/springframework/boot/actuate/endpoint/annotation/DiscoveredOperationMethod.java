@@ -41,6 +41,7 @@ public class DiscoveredOperationMethod extends OperationMethod {
 		super(method, operationType);
 		Assert.notNull(annotationAttributes, "AnnotationAttributes must not be null");
 		String[] produces = annotationAttributes.getStringArray("produces");
+		//提取Operation Method产生的的MIME类型
 		this.producesMediaTypes = Collections.unmodifiableList(Arrays.asList(produces));
 	}
 
