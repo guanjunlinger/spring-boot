@@ -38,6 +38,7 @@ public final class WebOperationRequestPredicate {
 
 	private final String path;
 
+    //提取匹配所有路径参数的路径变量名
 	private final String matchAllRemainingPathSegmentsVariable;
 
 	private final String canonicalPath;

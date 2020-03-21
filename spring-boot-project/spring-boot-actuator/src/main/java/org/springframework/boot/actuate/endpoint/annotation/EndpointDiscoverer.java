@@ -58,7 +58,7 @@ import org.springframework.util.StringUtils;
  * A Base for {@link EndpointsSupplier} implementations that discover
  * {@link Endpoint @Endpoint} beans and {@link EndpointExtension @EndpointExtension} beans
  * in an application context.
- *
+ *  模板方法模式,子类覆写createEndpoint Method逻辑
  * @param <E> the endpoint type
  * @param <O> the operation type
  * @author Andy Wilkinson
@@ -70,11 +70,16 @@ public abstract class EndpointDiscoverer<E extends ExposableEndpoint<O>, O exten
 		implements EndpointsSupplier<E> {
 
 	private final ApplicationContext applicationContext;
-
+	/**
+	 * 子类自定义EndpointFilter获取自己感兴趣的@EndPoint Bean
+	 */
 	private final Collection<EndpointFilter<E>> filters;
 
 	private final DiscoveredOperationsFactory<O> operationsFactory;
 
+	/**
+	 * 缓存EndPointBean和 ExposableEndpoint实例之间的映射关系,用于过滤EndpointExtension实例
+	 */
 	private final Map<EndpointBean, E> filterEndpoints = new ConcurrentHashMap<>();
 
 	private volatile Collection<E> endpoints;
@@ -119,8 +124,11 @@ public abstract class EndpointDiscoverer<E extends ExposableEndpoint<O>, O exten
 	}
 
 	private Collection<E> discoverEndpoints() {
+		//初始化所有@Endpoint注解Bean
 		Collection<EndpointBean> endpointBeans = createEndpointBeans();
+		//初始化所有@EndpointExtension注解Bean,解析注解配置的EndpointFilter,过滤ExtensionBean实例,绑定到EndpointBean实例
 		addExtensionBeans(endpointBeans);
+		//全局或者@Endpoint配置的EndpointFilter,过滤EndpointBean实例;生成ExposableEndpoint实例列表
 		return convertToEndpoints(endpointBeans);
 	}
 

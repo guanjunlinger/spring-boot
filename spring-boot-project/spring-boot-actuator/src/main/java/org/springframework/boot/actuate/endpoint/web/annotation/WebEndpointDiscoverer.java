@@ -76,6 +76,7 @@ public class WebEndpointDiscoverer extends EndpointDiscoverer<ExposableWebEndpoi
 	protected WebOperation createOperation(EndpointId endpointId, DiscoveredOperationMethod operationMethod,
 			OperationInvoker invoker) {
 		String rootPath = PathMapper.getRootPath(this.endpointPathMappers, endpointId);
+		//工厂方法创建WebOperationRequestPredicate,匹配HandlerMethod
 		WebOperationRequestPredicate requestPredicate = this.requestPredicateFactory.getRequestPredicate(rootPath,
 				operationMethod);
 		return new DiscoveredWebOperation(endpointId, operationMethod, invoker, requestPredicate);

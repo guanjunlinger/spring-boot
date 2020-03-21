@@ -56,6 +56,7 @@ class RequestPredicateFactory {
 		Parameter[] selectorParameters = Arrays.stream(method.getParameters()).filter(this::hasSelector)
 				.toArray(Parameter[]::new);
 		Parameter allRemainingPathSegmentsParameter = getAllRemainingPathSegmentsParameter(selectorParameters);
+		//利用@Selector注解拼接URL参数
 		String path = getPath(rootPath, selectorParameters, allRemainingPathSegmentsParameter != null);
 		WebEndpointHttpMethod httpMethod = determineHttpMethod(operationMethod.getOperationType());
 		Collection<String> consumes = getConsumes(httpMethod, method);
