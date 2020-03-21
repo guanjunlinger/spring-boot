@@ -60,7 +60,10 @@ import org.springframework.web.servlet.DispatcherServlet;
 @ConditionalOnBean({ DispatcherServlet.class, WebEndpointsSupplier.class })
 @EnableConfigurationProperties(CorsEndpointProperties.class)
 public class WebMvcEndpointManagementContextConfiguration {
-
+	/**
+	 *实现AbstractWebMvcEndpointHandlerMapping抽象类
+	  注册WebEndpointsSupplier解析ExposableWebEndpoint列表
+	 */
 	@Bean
 	@ConditionalOnMissingBean
 	public WebMvcEndpointHandlerMapping webEndpointServletHandlerMapping(WebEndpointsSupplier webEndpointsSupplier,
@@ -80,7 +83,10 @@ public class WebMvcEndpointManagementContextConfiguration {
 				corsProperties.toCorsConfiguration(), new EndpointLinksResolver(allEndpoints, basePath),
 				shouldRegisterLinksMapping);
 	}
-
+	/**
+	 *  扩展RequestMappingHandlerMapping类
+	 * 	注册ControllerEndpointsSupplier解析的ExposableControllerEndpoint列表
+	 */
 	@Bean
 	@ConditionalOnMissingBean
 	public ControllerEndpointHandlerMapping controllerEndpointHandlerMapping(
