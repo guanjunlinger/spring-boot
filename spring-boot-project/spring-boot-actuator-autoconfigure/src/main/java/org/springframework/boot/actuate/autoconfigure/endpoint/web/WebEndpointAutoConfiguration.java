@@ -84,6 +84,15 @@ public class WebEndpointAutoConfiguration {
 		return EndpointMediaTypes.DEFAULT;
 	}
 
+	/**配置WebEndpointsSupplier Bean,自动解析所有@WebEndpoint注解Bean
+	 *
+	 * @param parameterValueMapper
+	 * @param endpointMediaTypes
+	 * @param endpointPathMappers
+	 * @param invokerAdvisors
+	 * @param filters
+	 * @return
+	 */
 	@Bean
 	@ConditionalOnMissingBean(WebEndpointsSupplier.class)
 	public WebEndpointDiscoverer webEndpointDiscoverer(ParameterValueMapper parameterValueMapper,

@@ -58,7 +58,6 @@ import org.springframework.util.StringUtils;
  * A Base for {@link EndpointsSupplier} implementations that discover
  * {@link Endpoint @Endpoint} beans and {@link EndpointExtension @EndpointExtension} beans
  * in an application context.
- *  模板方法模式,子类覆写createEndpoint Method逻辑
  * @param <E> the endpoint type
  * @param <O> the operation type
  * @author Andy Wilkinson
@@ -70,16 +69,11 @@ public abstract class EndpointDiscoverer<E extends ExposableEndpoint<O>, O exten
 		implements EndpointsSupplier<E> {
 
 	private final ApplicationContext applicationContext;
-	/**
-	 * 子类自定义EndpointFilter获取自己感兴趣的@EndPoint Bean
-	 */
+
 	private final Collection<EndpointFilter<E>> filters;
 
 	private final DiscoveredOperationsFactory<O> operationsFactory;
 
-	/**
-	 * 缓存EndPointBean和 ExposableEndpoint实例之间的映射关系,用于过滤EndpointExtension实例
-	 */
 	private final Map<EndpointBean, E> filterEndpoints = new ConcurrentHashMap<>();
 
 	private volatile Collection<E> endpoints;
@@ -262,6 +256,7 @@ public abstract class EndpointDiscoverer<E extends ExposableEndpoint<O>, O exten
 	/**
 	 * Determine if an endpoint bean should be exposed. Subclasses can override this
 	 * method to provide additional logic.
+	 * 模板方法模式,子类覆写isEndpointExposed Method判断EndpointBean是否应该被暴露
 	 * @param endpointBean the endpoint bean
 	 * @return {@code true} if the endpoint is exposed
 	 */
@@ -322,6 +317,8 @@ public abstract class EndpointDiscoverer<E extends ExposableEndpoint<O>, O exten
 
 	/**
 	 * Factory method called to create the {@link ExposableEndpoint endpoint}.
+	 * EndpointBean
+	 * 模板方法模式,子类覆写createEndpoint Method适配不同的ExposableEndpoint实例
 	 * @param endpointBean the source endpoint bean
 	 * @param id the ID of the endpoint
 	 * @param enabledByDefault if the endpoint is enabled by default
@@ -333,6 +330,7 @@ public abstract class EndpointDiscoverer<E extends ExposableEndpoint<O>, O exten
 
 	/**
 	 * Factory method to create an {@link Operation endpoint operation}.
+	 * 模板方法模式,子类覆写createOperation Method适配不同的Operation实例
 	 * @param endpointId the endpoint id
 	 * @param operationMethod the operation method
 	 * @param invoker the invoker to use
