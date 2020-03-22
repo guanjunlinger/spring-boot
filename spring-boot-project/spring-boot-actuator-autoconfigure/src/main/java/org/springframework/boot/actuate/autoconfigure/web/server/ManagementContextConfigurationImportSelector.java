@@ -39,7 +39,7 @@ import org.springframework.util.StringUtils;
  * loaded from {@code /META-INF/spring.factories} under the
  * {@code org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration}
  * key.
- *
+ *  由@EnableManagementContext注解导入,负责注册ManagementContextConfiguration相关Bean
  * @author Dave Syer
  * @author Phillip Webb
  * @author Andy Wilkinson
@@ -70,6 +70,7 @@ class ManagementContextConfigurationImportSelector implements DeferredImportSele
 	private List<ManagementConfiguration> getConfigurations() {
 		SimpleMetadataReaderFactory readerFactory = new SimpleMetadataReaderFactory(this.classLoader);
 		List<ManagementConfiguration> configurations = new ArrayList<>();
+		//Spring factories 机制加载ManagementContextConfiguration列表
 		for (String className : loadFactoryNames()) {
 			addConfiguration(readerFactory, configurations, className);
 		}

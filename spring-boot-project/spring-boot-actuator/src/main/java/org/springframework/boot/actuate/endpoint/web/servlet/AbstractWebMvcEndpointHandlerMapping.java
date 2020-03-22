@@ -382,7 +382,9 @@ public abstract class AbstractWebMvcEndpointHandlerMapping extends RequestMappin
 		OperationHandler(ServletWebOperation operation) {
 			this.operation = operation;
 		}
-
+		/**
+		 * 	返回值处理器fallback到RequestResponseBodyMethodProcessor
+		 */
 		@ResponseBody
 		Object handle(HttpServletRequest request, @RequestBody(required = false) Map<String, String> body) {
 			return this.operation.handle(request, body);
