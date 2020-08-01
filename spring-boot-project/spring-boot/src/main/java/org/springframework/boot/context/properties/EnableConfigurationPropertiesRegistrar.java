@@ -35,11 +35,10 @@ class EnableConfigurationPropertiesRegistrar implements ImportBeanDefinitionRegi
 
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-		/** 注册ConfigurationPropertiesBindingPostProcessor绑定属性
-		 *  注册ConfigurationPropertiesBinder工具类处理属性绑定
-		 */
 		registerInfrastructureBeans(registry);
-		//ConfigurationPropertiesBeanRegistrar注册@EnableConfigurationProperties注解配置的Bean Class
+		/**
+		 注册@EnableConfigurationProperties value属性的Class列表到Bean容器
+		 */
 		ConfigurationPropertiesBeanRegistrar beanRegistrar = new ConfigurationPropertiesBeanRegistrar(registry);
 		getTypes(metadata).forEach(beanRegistrar::register);
 	}

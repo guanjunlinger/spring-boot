@@ -257,6 +257,7 @@ public final class ConfigurationPropertiesBean {
 		/**
 		 * 1.@bean工厂方法的@ConfigurationProperties注解
 		 * 2.Class上的@ConfigurationProperties注解
+		 * Validated允许定义属性校验规则
 		 */
 		ConfigurationProperties annotation = findAnnotation(instance, type, factory, ConfigurationProperties.class);
 		if (annotation == null) {
