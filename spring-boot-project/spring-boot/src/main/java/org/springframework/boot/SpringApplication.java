@@ -305,7 +305,7 @@ public class SpringApplication {
 		configureHeadlessProperty();
 		//Spring Factories机制加载SpringApplicationRunListener列表
 		SpringApplicationRunListeners listeners = getRunListeners(args);
-		//发布ApplicationStartingEvent
+		//触发SpringApplicationRunListener.starting回调
 		listeners.starting();
 		try {
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
@@ -313,7 +313,6 @@ public class SpringApplication {
 			configureIgnoreBeanInfo(environment);
 			Banner printedBanner = printBanner(environment);
 			context = createApplicationContext();
-			//Spring Factories机制加载SpringBootExceptionReporter列表
 			exceptionReporters = getSpringFactoriesInstances(SpringBootExceptionReporter.class,
 					new Class[] { ConfigurableApplicationContext.class }, context);
 			prepareContext(context, environment, listeners, applicationArguments, printedBanner);
@@ -323,9 +322,8 @@ public class SpringApplication {
 			if (this.logStartupInfo) {
 				new StartupInfoLogger(this.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);
 			}
-			//发布ApplicationStartedEvent
+			//触发SpringApplicationRunListener.started回调
 			listeners.started(context);
-			//运行Bean容器管理的ApplicationRunner和CommandLineRunner Bean实例
 			callRunners(context, applicationArguments);
 		}
 		catch (Throwable ex) {
@@ -334,7 +332,7 @@ public class SpringApplication {
 		}
 
 		try {
-			//发布ApplicationReadyEvent
+			//触发SpringApplicationRunListener.running回调
 			listeners.running(context);
 		}
 		catch (Throwable ex) {
@@ -350,7 +348,7 @@ public class SpringApplication {
 		ConfigurableEnvironment environment = getOrCreateEnvironment();
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
 		ConfigurationPropertySources.attach(environment);
-		//发布ApplicationEnvironmentPreparedEvent
+		//触发SpringApplicationRunListener.environmentPrepared 回调
 		listeners.environmentPrepared(environment);
 		bindToSpringApplication(environment);
 		if (!this.isCustomEnvironment) {
@@ -377,7 +375,7 @@ public class SpringApplication {
 		context.setEnvironment(environment);
 		postProcessApplicationContext(context);
 		applyInitializers(context);
-		//发布ApplicationContextInitializedEvent
+		//触发SpringApplicationRunListener.contextPrepared回调
 		listeners.contextPrepared(context);
 		if (this.logStartupInfo) {
 			logStartupInfo(context.getParent() == null);
@@ -400,7 +398,7 @@ public class SpringApplication {
 		Set<Object> sources = getAllSources();
 		Assert.notEmpty(sources, "Sources must not be empty");
 		load(context, sources.toArray(new Object[0]));
-		//发布ApplicationPreparedEvent
+		//触发SpringApplicationRunListener.contextLoaded回调
 		listeners.contextLoaded(context);
 	}
 
