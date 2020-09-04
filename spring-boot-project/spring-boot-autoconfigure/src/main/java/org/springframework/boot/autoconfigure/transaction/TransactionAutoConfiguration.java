@@ -81,9 +81,6 @@ public class TransactionAutoConfiguration {
 
 	}
 
-	/**
-	 * 仅当TransactionManager Bean存在时,启用事务配置
-	 */
 	@Configuration(proxyBeanMethods = false)
 	@ConditionalOnBean(TransactionManager.class)
 	@ConditionalOnMissingBean(AbstractTransactionManagementConfiguration.class)

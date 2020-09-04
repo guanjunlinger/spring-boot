@@ -53,7 +53,8 @@ import org.springframework.util.MultiValueMap;
  * {@link EventListener}) and direct {@link ServletContextInitializer} beans are at the
  * end. Further sorting is applied within these groups using the
  * {@link AnnotationAwareOrderComparator}.
- *
+ *  迭代器模式管理容器中所有ServletContextInitializer Bean实例
+ *  同时适配Servlet,Filter,EventListener对象
  * @author Dave Syer
  * @author Phillip Webb
  * @author Brian Clozel

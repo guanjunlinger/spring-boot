@@ -30,7 +30,7 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 /**
  * {@link ServletContainerInitializer} used to trigger {@link ServletContextInitializer
  * ServletContextInitializers} and track startup errors.
- *
+ *  ServletContainerInitializer将Servlet组件的注册交给ServletContextInitializer实现类
  * @author Phillip Webb
  * @author Andy Wilkinson
  */

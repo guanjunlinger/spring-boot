@@ -118,6 +118,11 @@ public class TomcatWebServer implements WebServer {
 
 				// Unlike Jetty, all Tomcat threads are daemon threads. We create a
 				// blocking non-daemon to stop immediate shutdown
+				/**
+				 * Tomcat默认所有线程都是守护线程,至少需要保持一个线程一直存在
+				 * 主线程需要继续完成初始化工作,所以只能新开一个线程
+				 */
+
 				startDaemonAwaitThread();
 			}
 			catch (Exception ex) {
