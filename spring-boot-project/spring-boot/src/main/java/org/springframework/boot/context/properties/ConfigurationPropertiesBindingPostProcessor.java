@@ -33,9 +33,6 @@ import org.springframework.util.Assert;
 /**
  * {@link BeanPostProcessor} to bind {@link PropertySources} to beans annotated with
  * {@link ConfigurationProperties @ConfigurationProperties}.
- *
- *   为@ConfigurationProperties注解的Bean填充属性
- *
  * @author Dave Syer
  * @author Phillip Webb
  * @author Christian Dupuis

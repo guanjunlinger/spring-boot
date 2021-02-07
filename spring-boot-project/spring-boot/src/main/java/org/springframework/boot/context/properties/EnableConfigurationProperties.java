@@ -42,6 +42,7 @@ public @interface EnableConfigurationProperties {
 
 	/**
 	 * The bean name of the configuration properties validator.
+	 * 配置属性相关自定义Validator扩展点
 	 * @since 2.2.0
 	 */
 	String VALIDATOR_BEAN_NAME = "configurationPropertiesValidator";

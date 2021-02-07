@@ -106,13 +106,16 @@ class ConfigurationPropertiesBinder {
 	private <T> BindHandler getBindHandler(Bindable<T> target, ConfigurationProperties annotation) {
 		List<Validator> validators = getValidators(target);
 		BindHandler handler = new IgnoreTopLevelConverterNotFoundBindHandler();
+		//处理非法字段
 		if (annotation.ignoreInvalidFields()) {
 			handler = new IgnoreErrorsBindHandler(handler);
 		}
+		//处理未知字段
 		if (!annotation.ignoreUnknownFields()) {
 			UnboundElementsSourceFilter filter = new UnboundElementsSourceFilter();
 			handler = new NoUnboundElementsBindHandler(handler, filter);
 		}
+		//处理属性验证
 		if (!validators.isEmpty()) {
 			handler = new ValidationBindHandler(handler, validators.toArray(new Validator[0]));
 		}

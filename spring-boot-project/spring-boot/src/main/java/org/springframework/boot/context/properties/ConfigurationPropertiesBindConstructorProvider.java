@@ -36,6 +36,17 @@ class ConfigurationPropertiesBindConstructorProvider implements BindConstructorP
 
 	static final ConfigurationPropertiesBindConstructorProvider INSTANCE = new ConfigurationPropertiesBindConstructorProvider();
 
+	/**
+	 * 默认搜索策略:
+	 * @ConstructorBinding注解的构造器
+	 * @ConstructorBinding注解的class
+	 * 只定义一个有参构造器
+	 *
+	 * @param bindable the bindable to check
+	 * @param isNestedConstructorBinding if this binding is nested within a constructor
+	 * binding
+	 * @return
+	 */
 	@Override
 	public Constructor<?> getBindConstructor(Bindable<?> bindable, boolean isNestedConstructorBinding) {
 		return getBindConstructor(bindable.getType().resolve(), isNestedConstructorBinding);
@@ -45,11 +56,8 @@ class ConfigurationPropertiesBindConstructorProvider implements BindConstructorP
 		if (type == null) {
 			return null;
 		}
-		//构造器有@ConstructorBinding注解
 		Constructor<?> constructor = findConstructorBindingAnnotatedConstructor(type);
-		//Class 上@ConstructorBinding注解
 		if (constructor == null && (isConstructorBindingAnnotatedType(type) || isNestedConstructorBinding)) {
-			//fallback到只有一个有参数的构造器
 			constructor = deduceBindConstructor(type);
 		}
 		return constructor;

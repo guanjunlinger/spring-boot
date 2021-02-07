@@ -31,7 +31,7 @@ import org.springframework.util.Assert;
 
 /**
  * Utility to deduce the {@link PropertySources} to use for configuration binding.
- *
+ *  工具类获取Environment相关的PropertySources
  * @author Phillip Webb
  */
 class PropertySourcesDeducer {

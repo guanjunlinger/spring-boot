@@ -255,9 +255,9 @@ public final class ConfigurationPropertiesBean {
 
 	private static ConfigurationPropertiesBean create(String name, Object instance, Class<?> type, Method factory) {
 		/**
+		 * @ConfigurationProperties注解搜索优先级
 		 * 1.@bean工厂方法的@ConfigurationProperties注解
 		 * 2.Class上的@ConfigurationProperties注解
-		 * Validated允许定义属性校验规则
 		 */
 		ConfigurationProperties annotation = findAnnotation(instance, type, factory, ConfigurationProperties.class);
 		if (annotation == null) {
